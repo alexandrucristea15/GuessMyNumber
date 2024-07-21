@@ -9,7 +9,7 @@ let guessed = false;
 let secretNumber = randomNumber(1, 20);
 let highScore = 0;
 function randomNumber(min, max) {
-  Math.trunc(Math.random() * max) + min;
+  return Math.trunc(Math.random() * max) + min;
 }
 
 const messageChange = message =>
