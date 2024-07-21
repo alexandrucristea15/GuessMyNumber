@@ -6,8 +6,12 @@
 // document.querySelector('.guess').value = 23;
 let score = 20; //Number(document.querySelector('.score').textContent);
 let guessed = false;
-let secretNumber = Math.trunc(Math.random() * 20) + 1;
+let secretNumber = randomNumber(1, 20);
 let highScore = 0;
+function randomNumber(min, max) {
+  Math.trunc(Math.random() * max) + min;
+}
+
 const messageChange = message =>
   (document.querySelector('.message').textContent = message);
 
@@ -57,7 +61,7 @@ const onClickAgainHandler = () => {
   document.querySelector('body').style.backgroundColor = '#222';
   score = 20;
   guessed = false;
-  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  secretNumber = randomNumber(1, 20);
 };
 
 document.querySelector('.check').addEventListener('click', onClickCheckHandler);
