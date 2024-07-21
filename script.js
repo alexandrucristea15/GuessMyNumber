@@ -8,15 +8,22 @@ let score = 20; //Number(document.querySelector('.score').textContent);
 let guessed = false;
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let highScore = 0;
+const messageChange = message =>
+  (document.querySelector('.message').textContent = message);
+
+const numberChange = number =>
+  (document.querySelector('.number').textContent = number);
+
+const scoreUpdate = score =>
+  (document.querySelector('.score').textContent = score);
 const onClickCheckHandler = () => {
   const guess = Number(document.querySelector('.guess').value);
   if (!guess || (guess > 20 && !guessed)) {
-    document.querySelector('.message').textContent =
-      'Please enter a value between 1 and 20';
+    messageChange('Please enter a value between 1 and 20');
     return;
   } else if (guess === secretNumber && !guessed) {
-    document.querySelector('.message').textContent = 'Correct Number👌';
-    document.querySelector('.number').textContent = secretNumber;
+    messageChange('Correct Number👌');
+    numberChange(secretNumber);
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
     if (score > highScore) {
@@ -26,27 +33,26 @@ const onClickCheckHandler = () => {
     guessed = true;
   } else if (!guessed) {
     if (score > 1) {
-      document.querySelector('.message').textContent = `${
+      messageChange(
         guess < secretNumber
           ? 'Too Low!!! Try Again!'
           : 'Too High!!! Try Again!'
-      }`;
+      );
       score--;
-      document.querySelector('.score').textContent = score;
+      scoreUpdate(score);
     } else {
-      document.querySelector('.message').textContent =
-        'You Lost! Press the Again button to retry!';
-      document.querySelector('.score').textContent = 0;
+      messageChange('You Lost! Press the Again button to retry!');
+      scoreUpdate(0);
       document.querySelector('body').style.backgroundColor = '#c62d2d';
     }
   }
 };
 
 const onClickAgainHandler = () => {
-  document.querySelector('.message').textContent = 'Start guessing...';
+  messageChange('Start guessing...');
   document.querySelector('.guess').value = '';
-  document.querySelector('.number').textContent = '?';
-  document.querySelector('.score').textContent = 20;
+  numberChange('?');
+  scoreUpdate(20);
   document.querySelector('.number').style.width = '15rem';
   document.querySelector('body').style.backgroundColor = '#222';
   score = 20;
