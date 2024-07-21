@@ -1,9 +1,4 @@
 'use strict';
-// console.log(document.querySelector('.message').textContent);
-// document.querySelector('.message').textContent = 'Correct Number👌';
-// document.querySelector('.number').textContent = 23;
-// document.querySelector('.score').textContent = 12;
-// document.querySelector('.guess').value = 23;
 let score = 20; //Number(document.querySelector('.score').textContent);
 let guessed = false;
 let secretNumber = randomNumber(1, 20);
@@ -20,6 +15,13 @@ const numberChange = number =>
 
 const scoreUpdate = score =>
   (document.querySelector('.score').textContent = score);
+
+const bodyBgColorChange = color =>
+  (document.querySelector('body').style.backgroundColor = color);
+
+const numberElementWidthChange = width =>
+  (document.querySelector('.number').style.width = width);
+
 const onClickCheckHandler = () => {
   const guess = Number(document.querySelector('.guess').value);
   if (!guess || (guess > 20 && !guessed)) {
@@ -28,8 +30,8 @@ const onClickCheckHandler = () => {
   } else if (guess === secretNumber && !guessed) {
     messageChange('Correct Number👌');
     numberChange(secretNumber);
-    document.querySelector('body').style.backgroundColor = '#60b347';
-    document.querySelector('.number').style.width = '30rem';
+    bodyBgColorChange('#60b347');
+    numberElementWidthChange('30rem');
     if (score > highScore) {
       highScore = score;
     }
@@ -47,7 +49,7 @@ const onClickCheckHandler = () => {
     } else {
       messageChange('You Lost! Press the Again button to retry!');
       scoreUpdate(0);
-      document.querySelector('body').style.backgroundColor = '#c62d2d';
+      bodyBgColorChange('#c62d2d');
     }
   }
 };
@@ -57,8 +59,8 @@ const onClickAgainHandler = () => {
   document.querySelector('.guess').value = '';
   numberChange('?');
   scoreUpdate(20);
-  document.querySelector('.number').style.width = '15rem';
-  document.querySelector('body').style.backgroundColor = '#222';
+  numberElementWidthChange('15rem');
+  bodyBgColorChange('#222');
   score = 20;
   guessed = false;
   secretNumber = randomNumber(1, 20);
